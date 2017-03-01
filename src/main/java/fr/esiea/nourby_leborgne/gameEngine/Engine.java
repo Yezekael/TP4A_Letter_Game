@@ -41,7 +41,7 @@ public class Engine {
 	
 	public boolean isValid(String s){//vérifie si le mot est valide
 		for(int i=0; i<s.length() ; i++){
-			if(this.commonJar.contains(String.valueOf(s.charAt(i)))==false){
+			if(!this.commonJar.contains(String.valueOf(s.charAt(i)))){
 				return false;
 			}
 		}
@@ -85,7 +85,7 @@ public class Engine {
 		}
 	}
 	
-	public void displayPlayers(){//affiche chauqe joueur et ses mots
+	public void displayPlayers(){//affiche chaque joueur et ses mots
 		for(int i=0; i<this.nbPlayer; i++){
 			System.out.println(this.playerList.get(i).getName());
 			System.out.println("Words:");
@@ -136,16 +136,24 @@ public class Engine {
 	}
 	
 	public int decideWord(String s, Player p, int indexP){//fonction qui décide quoi faire avec le mot
-		if(s==" "){
-			indexP=(indexP+1)%this.nbPlayer;
+		if(s.equals(null)){
+			if(indexP==0){
+				indexP=1;
+			}else{
+				indexP=0;
+			}
 			System.out.println("Le joueur a passé son tour !");
 		}
 		else{
-			if(this.isValid(s)==true){
+			if(this.isValid(s)){
 				this.add(s, p);
-				indexP=(indexP+1)%this.nbPlayer;
 			}else{
-				System.out.println("Le mot choisit n'est pas valide !");
+				if(indexP==0){
+					indexP=1;
+				}else{
+					indexP=0;
+				}
+				System.out.println("Le mot choisit n'est pas valide ! Au tour de l'autre joueur!");
 			}
 		}
 		return indexP;
@@ -159,7 +167,7 @@ public class Engine {
 		do{
 			this.tour(currentPlayer);
 			word=this.waitWord();
-			this.decideWord(word, currentPlayer, indexCurrentPlayer);
+			currentPlayer = this.playerList.get(this.decideWord(word, currentPlayer, indexCurrentPlayer));
 			this.checkEnd();
 		}while(this.gameEnd!=true);
 		this.displayEnd();

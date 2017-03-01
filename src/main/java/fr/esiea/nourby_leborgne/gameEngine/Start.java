@@ -21,7 +21,7 @@ public class Start {
 		this.nbPlayers=2;
 	}
 	
-	public void displayMenu(){//affiche le menu et revoie le choix
+	public void displayMenu(){//affiche le menu et renvoie le choix
 		System.out.println(this.menu);	
 		int cMenu=0;
 		boolean wait=true;
@@ -49,7 +49,7 @@ public class Start {
 	}
 
 	
-	public void displayPlay(){//affiche l'écran de sélection du type de jeu et revoie le choix
+	public void displayPlay(){//affiche l'écran de sélection du type de jeu et renvoie le choix
 		System.out.println(this.play);
 		int cPlay=0;
 		boolean wait=true;
@@ -83,7 +83,7 @@ public class Start {
 		}//fin while
 	}
 	
-	public void displayChoice(){//affiche l'écran de sélection de la difficulté et revoie le choix
+	public void displayChoice(){//affiche l'écran de sélection de la difficulté et renvoie le choix
 		System.out.println(this.choice);
 		int cDif=0;
 		boolean wait=true;

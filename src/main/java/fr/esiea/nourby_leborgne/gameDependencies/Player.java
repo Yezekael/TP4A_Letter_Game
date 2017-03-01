@@ -28,7 +28,7 @@ public class Player {
 	
 	public boolean hasWord(String s){
 		for(int i=0; i<this.wordList.size() ; i++){
-			if(this.wordList.get(i).getWord().equals(s)==true){
+			if(this.wordList.get(i).getWord().equals(s)){
 				return true;
 			}
 		}
@@ -52,7 +52,8 @@ public class Player {
 	
 	public boolean delWord(Word w){
 		if(this.wordList.contains(w)){
-			return this.wordList.remove(w);
+			this.wordList.remove(w);
+			return true;
 		}
 		else{
 			return false;
