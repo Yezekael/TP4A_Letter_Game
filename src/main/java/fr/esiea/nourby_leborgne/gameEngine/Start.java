@@ -61,7 +61,7 @@ public class Start {
 			case 1:
 				wait=false;
 				//startGame
-				this.engine=new Engine(this.nbPlayers, this.difficulty);
+				this.engine=new Engine(this.nbPlayers, this.difficulty, null);
 				this.engine.gameStart();
 				this.displayMenu();
 				break;
