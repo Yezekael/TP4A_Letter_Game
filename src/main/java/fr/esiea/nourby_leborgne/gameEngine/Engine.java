@@ -20,7 +20,7 @@ public class Engine {
 	private int nbPlayer;
 	private boolean gameEnd;
 
-	public Engine(int nP, int dif) {// initialization du jeu
+	public Engine(int nP, int dif) {// initialization of game variables
 		this.gameEnd = false;
 		this.nbPlayer = nP;
 		this.wordsMade = new WordsMade();
@@ -42,7 +42,7 @@ public class Engine {
 		return this.nbPlayer;
 	}
 
-	public boolean isValid(String s) {// vérifie si le mot est valide
+	public boolean isValid(String s) {// Check if the word is possible
 		for (int i = 0; i < s.length(); i++) {
 			if (!this.commonJar.contains(String.valueOf(s.charAt(i)))) {
 				return false;
@@ -54,19 +54,19 @@ public class Engine {
 		return true;
 	}
 
-	public void del(String s, Player p) {// fonction qui supprime le mot d'un
-											// joueur
+	public void del(String s, Player p) {// delete a word
+											
 		p.delWord(s);
 	}
 
-	public void add(String s, Player p) {// fonction qui ajoute un mot à un
-											// joueur
+	public void add(String s, Player p) {// add a word
+											
 		p.addWord(s);
 		this.commonJar.delLetter(s);
 		this.wordsMade.addWord(s);
 	}
 
-	public String waitWord() {// attend qu'un mot soit écrit par un joueur
+	public String waitWord() {// Wait for a player to play
 		Scanner sc = new Scanner(System.in);
 		String str = " ";
 		System.out.println("Veuillez saisir un mot :");
@@ -81,7 +81,7 @@ public class Engine {
 		return str;
 	}
 
-	public void checkEnd() {// vérifie si un joueur satisfait les conditions de
+	public void checkEnd() {// Check if game is finished
 							// fin
 		for (int i = 0; i < this.nbPlayer; i++) {
 			System.out.println(
@@ -92,7 +92,7 @@ public class Engine {
 		}
 	}
 
-	public void displayPlayers() {// affiche chaque joueur et ses mots
+	public void displayPlayers() {// Displays words of each player
 		for (int i = 0; i < this.nbPlayer; i++) {
 			System.out.println(this.playerList.get(i).getName());
 			System.out.println("Words:");
@@ -101,25 +101,25 @@ public class Engine {
 		}
 	}
 
-	public void displayLetters() {// affiches les lettres du pot commun
+	public void displayLetters() {// Displays letters in game
 		System.out.print("Le pot de lettres contient: ");
 		this.commonJar.showLetters();
 		System.out.println("\n");
 	}
 
-	public void displayEnd() {// écran de fin
+	public void displayEnd() {
 		System.out.println("Fin du jeu !");
 	}
 
-	public String drawLetter(Player p) {// fonction qui tire une lettre par
-										// joueur
+	public String drawLetter(Player p) {// Drawing function
+										
 		System.out.println(p.getName() + " est en train de tirer une lettre...");
 		this.commonJar.addLetter(this.letterBag.drawLetter());
 		System.out.println("Il a tiré " + this.commonJar.getLast());
 		return this.commonJar.getLast();
 	}
 
-	public int begin() {// choisit quel joueur commence
+	public int begin() {// Decides who starts
 		int indexP = 0;
 		int val;
 		val = this.letterBag.getLetterValue(this.drawLetter(this.playerList.get(indexP)));
@@ -134,7 +134,7 @@ public class Engine {
 		return indexP;
 	}
 
-	public void tour(Player p) {// fonction qui gère les tours
+	public void tour(Player p) {// Whose turn is it 
 		System.out.println("Tour de " + p.getName());
 		this.drawLetter(p);
 		this.drawLetter(p);
@@ -142,8 +142,8 @@ public class Engine {
 		this.displayLetters();
 	}
 
-	public int decideWord(String s, Player p, int indexP) {// fonction qui
-															// décide quoi faire
+	public int decideWord(String s, Player p, int indexP) {// Word valid or not
+															
 		if (!dico.notValid(s) && this.isValid(s) && dico.contains(s)) {
 			this.add(s, p);
 			for(int i=0; i<s.length(); i++){
@@ -160,7 +160,7 @@ public class Engine {
 		return indexP;
 	}
 
-	public void gameStart() {// fonction qui gère les tours de jeu
+	public void gameStart() {// Alternate turns
 		this.gameEnd = false;
 		int indexCurrentPlayer = this.begin();
 		Player currentPlayer = this.playerList.get(indexCurrentPlayer);
