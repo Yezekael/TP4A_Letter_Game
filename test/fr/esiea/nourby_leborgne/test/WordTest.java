@@ -1,6 +1,5 @@
 package fr.esiea.nourby_leborgne.test;
 
-import fr.esiea.nourby_leborgne.gameDependencies.CommonJar;
 import fr.esiea.nourby_leborgne.gameDependencies.Word;
 
 import org.junit.Test;
@@ -16,17 +15,20 @@ public class WordTest {
 		
 		String s = "awawawawawa";
 		Word w = new Word(s);
-		int t = s.length();
-		assertTrue("Fail", w.getWord().equals(s) & w.getWordSize() == t);
+		Integer l = 12;
+		System.out.println(w.getWord());
+		Integer a = w.getWordSize();
+		assertTrue("Fail", w.getWord().equals("awawawawawa") & a.equals(l));
 	}
+		
 	
 	@Test
 	public void testGetWordStr()
 	{
-		Word w = new Word("Nope");
- 		String[] m = new String[]{"n","o","p","e"};
-		//assertTrue("string []", w.getWordStr().getClass()== String[].class);
-		assertTrue("Fail", Arrays.equals(m, w.getWordStr()) & w.getWordSize() == 4);
+		Word w = new Word("salut");
+ 		String[] m = new String[]{"s","a","l","u","t"};
+		assertTrue("string []", w.getWordStr().getClass()== String[].class);
+		assertTrue("Fail",Arrays.equals(m, w.getWordStr()) & w.getWordSize() == 5);
 	}
 
 }
