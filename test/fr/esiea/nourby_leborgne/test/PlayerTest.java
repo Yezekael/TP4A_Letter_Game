@@ -12,9 +12,8 @@ public class PlayerTest {
 	@Test
 	public void testLinkedList()
 	{
-		String w1 ="ùmakod";
-		String w2 ="pefjiejmq";
-		//test addWord & getLastWord
+		String w1 ="bla";
+		String w2 ="blabla";
 		Player p= new Player();
 		p.addWord(w2);
 		p.addWord(w1);
@@ -26,29 +25,34 @@ public class PlayerTest {
 	public void testDelWord()
 	{
 		Player p = new Player();
-		p.addWord("salut");
-		p.addWord("bonjour hello");
-		p.addWord("coucou toi aussi");
-		assertTrue("echec de suppression String", p.delWord("coucou"));
-		//assertFalse("Fail : déjà supprimé",p.delWord("efeofk"));
-		//Word w = new Word("blabla dodo");
-		//p.addWord(w);
-		//assertTrue("Fail", p.delWord(w));
+		p.addWord("blabla");
+		assertTrue("echec de suppression String", p.delWord("blabla"));
+		assertFalse("Fail : already deleted",p.delWord("blabla"));
+		Word w = new Word("blablabla");
+		p.addWord(w);
+		assertTrue("Fail deletion of Word", p.delWord(w));
 	}
 	
 	@Test
 	public void testHasword()
+	{Player p = new Player();
+	p.addWord("Hello");
+	Word w = new Word("Salut");
+	p.addWord(w);
+	assertTrue("Fail string parsing",p.hasWord("Hello"));
+	assertTrue("Fail word parsing",p.hasWord(w));
+	p.delWord(w);
+	assertFalse("Fail",p.hasWord(w));
+	}
+	
+	public void testListSize()
 	{
 		Player p = new Player();
-		p.addWord("youhou");
-		p.addWord("je");
-		p.addWord("suis un pirate");
-		Word w = new Word("moi pareil");
-		p.addWord(w);
-		assertTrue("Fail recherche string",p.hasWord("pirate"));
-		assertTrue("Fail recherche word",p.hasWord(w));
-		p.delWord(w);
-		assertFalse("Fail mot supprimé",p.hasWord(w));
-		
-}
-}
+		p.addWord("a");
+		p.addWord("b");
+		p.addWord("c");
+		Integer a = p.getListSize();
+		Integer b = 3;
+		assertTrue("List size error", a.equals(b));
+	}
+}	
