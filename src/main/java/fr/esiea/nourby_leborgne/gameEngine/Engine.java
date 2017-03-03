@@ -21,7 +21,7 @@ public class Engine {
 	private int nbPlayer;
 	private boolean gameEnd;
 
-	public Engine(int nP, int dif) {// initialization of game variables
+	public Engine(int nP, int dif, Dictionnary dictionnary) {// initialization of game variables
 		this.gameEnd = false;
 		this.nbPlayer = nP;
 		this.wordsMade = new WordsMade();
