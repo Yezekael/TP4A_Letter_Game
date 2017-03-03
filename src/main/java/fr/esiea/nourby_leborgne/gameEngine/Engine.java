@@ -1,5 +1,6 @@
 package fr.esiea.nourby_leborgne.gameEngine;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -42,14 +43,49 @@ public class Engine {
 		return this.nbPlayer;
 	}
 
-	public boolean isValid(String s) {// vérifie si le mot est valide
-		for (int i = 0; i < s.length(); i++) {
-			if (!this.commonJar.contains(String.valueOf(s.charAt(i)))) {
+	public LinkedList<Character> charArrayToList(char[] charArray) {
+		LinkedList<Character> charList = new LinkedList<Character>();
+		for (int i = 0; i < charArray.length; i++) {
+			charList.add(charArray[i]);
+		}
+		return charList;
+	}
+
+	public boolean isValid(String s, Player p) {// vérifie si le mot est valide
+		LinkedList<Character> sList;
+		LinkedList<Character> sListSave = charArrayToList(s.toCharArray());
+		sList = sListSave;
+		int matchIndex = 0;
+		boolean anagram = false;
+		for (int j = 0; j < p.getListSize(); j++) {
+			sList = sListSave;
+			char[] wordTestCharArray = p.getWord(j).toCharArray();
+			LinkedList<Character> wordTestList = charArrayToList(wordTestCharArray);
+			for (int k = 0; k < sListSave.size(); k++) {
+				if (wordTestList.contains(sListSave.get(k))) {
+					wordTestList.remove(sListSave.get(k));
+					sList.remove(sListSave.get(k));
+				}
+			}
+			if (wordTestList.size() == 0) {
+				anagram = true;
+				matchIndex = j;
+				break;
+			}
+		}
+		for (int i = 0; i < sList.size(); i++) {
+			if (!this.commonJar.contains(String.valueOf(sList.get(i)))) {
 				return false;
 			}
 		}
 		if (this.wordsMade.isInHistory(s)) {
 			return false;
+		}
+		for (int l = 0; l < sList.size(); l++) {
+			commonJar.delLetter(Character.toString(sList.get(l)));
+		}
+		if (anagram) {
+			p.delWord(matchIndex);
 		}
 		return true;
 	}
@@ -144,12 +180,11 @@ public class Engine {
 
 	public int decideWord(String s, Player p, int indexP) {// fonction qui
 															// décide quoi faire
-		if (!dico.notValid(s) && this.isValid(s) && dico.contains(s)) {
-			this.add(s, p);
-			for(int i=0; i<s.length(); i++){
-				commonJar.delLetter(Character.toString(s.charAt(i)));
+		if(dico.contains(s)){
+			if (!dico.notValid(s) && this.isValid(s, p)) {
+				this.add(s, p);
+				return indexP;
 			}
-			return indexP;
 		}
 		if (indexP == 0) {
 			indexP = 1;

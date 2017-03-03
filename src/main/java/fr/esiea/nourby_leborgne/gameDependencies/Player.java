@@ -70,6 +70,11 @@ public class Player {
 		return false;
 	}
 	
+	public boolean delWord(int i){
+		wordList.remove(i);
+		return true;
+	}
+	
 	public void addWord(Word w){
 		this.wordList.add(w);
 	}
@@ -81,6 +86,10 @@ public class Player {
 		else{
 			return false;
 		}
+	}
+	
+	public String getWord(int i){
+		return wordList.get(i).getWord();
 	}
 }
 
