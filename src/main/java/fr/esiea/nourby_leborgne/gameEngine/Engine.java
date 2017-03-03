@@ -146,6 +146,9 @@ public class Engine {
 															// décide quoi faire
 		if (!dico.notValid(s) && this.isValid(s) && dico.contains(s)) {
 			this.add(s, p);
+			for(int i=0; i<s.length(); i++){
+				commonJar.delLetter(Character.toString(s.charAt(i)));
+			}
 			return indexP;
 		}
 		if (indexP == 0) {
