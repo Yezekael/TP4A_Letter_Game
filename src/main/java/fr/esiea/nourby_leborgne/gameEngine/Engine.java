@@ -43,7 +43,7 @@ public class Engine {
 		return this.nbPlayer;
 	}
 
-<<<<<<< HEAD
+	
 	public LinkedList<Character> charArrayToList(char[] charArray) {
 		LinkedList<Character> charList = new LinkedList<Character>();
 		for (int i = 0; i < charArray.length; i++) {
@@ -76,11 +76,6 @@ public class Engine {
 		}
 		for (int i = 0; i < sList.size(); i++) {
 			if (!this.commonJar.contains(String.valueOf(sList.get(i)))) {
-=======
-	public boolean isValid(String s) {// Check if the word is possible
-		for (int i = 0; i < s.length(); i++) {
-			if (!this.commonJar.contains(String.valueOf(s.charAt(i)))) {
->>>>>>> 8b1fc28358c69d92b81abdd42532155998f60832
 				return false;
 			}
 		}
@@ -184,21 +179,13 @@ public class Engine {
 		this.displayLetters();
 	}
 
-<<<<<<< HEAD
-	public int decideWord(String s, Player p, int indexP) {// fonction qui
-															// décide quoi faire
-		if(dico.contains(s)){
-			if (!dico.notValid(s) && this.isValid(s, p)) {
-				this.add(s, p);
-				return indexP;
-=======
+
 	public int decideWord(String s, Player p, int indexP) {// Word valid or not
 															
-		if (!dico.notValid(s) && this.isValid(s) && dico.contains(s)) {
+		if (!dico.notValid(s) && this.isValid(s, p) && dico.contains(s)) {
 			this.add(s, p);
 			for(int i=0; i<s.length(); i++){
 				commonJar.delLetter(Character.toString(s.charAt(i)));
->>>>>>> 8b1fc28358c69d92b81abdd42532155998f60832
 			}
 		}
 		if (indexP == 0) {
